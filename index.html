@@ -12,73 +12,88 @@
       background-color: #fffaf5;
       color: #2e2e2e;
     }
+
     header {
-      background-color: #fff;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background-image: url('background.png');
+      background-size: cover;
+      background-position: center;
+      padding: 30px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: white;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
     }
-    header h1 {
+
+    .logo {
+      height: 60px;
+      margin-right: 20px;
+    }
+
+    .title-area h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.5em;
-      color: #c48189;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+      margin: 0;
+      color: white;
     }
-    .logo-inline {
-      height: 40px;
-      vertical-align: middle;
-    }
-    header p {
+
+    .title-area p {
       font-size: 1.1em;
-      color: #777;
+      margin: 5px 0 0;
+      color: white;
     }
+
     .hero {
-      background: url('background.png') no-repeat center center/cover;
-      height: 400px;
+      background: #fffaf5;
+      height: 250px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      text-shadow: 2px 2px 4px #000;
       text-align: center;
-      padding: 0 20px;
+      color: #c48189;
     }
+
     .hero h2 {
       font-size: 2.5em;
       max-width: 800px;
     }
+
     .section {
       padding: 60px 20px;
       max-width: 1000px;
       margin: auto;
     }
+
     .section h3 {
       font-family: 'Playfair Display', serif;
       font-size: 2em;
       color: #d4af37;
       margin-bottom: 20px;
     }
+
     .about p, .services ul {
       font-size: 1.1em;
       line-height: 1.8;
     }
+
     .services ul {
       list-style-type: disc;
       padding-left: 20px;
     }
+
     .contact form {
       display: flex;
       flex-direction: column;
       gap: 15px;
     }
+
     .contact input, .contact textarea {
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1em;
     }
+
     .contact button {
       background-color: #c48189;
       color: white;
@@ -88,22 +103,27 @@
       font-size: 1em;
       cursor: pointer;
     }
+
     .contact button:hover {
       background-color: #a9626d;
     }
+
     .social {
       text-align: center;
       margin-top: 40px;
     }
+
     .social a {
       margin: 0 10px;
       color: #c48189;
       font-weight: bold;
       text-decoration: none;
     }
+
     .social a:hover {
       text-decoration: underline;
     }
+
     footer {
       background-color: #2e2e2e;
       color: white;
@@ -114,11 +134,11 @@
 </head>
 <body>
   <header>
-    <h1>
-      <img src="logo.png" alt="7 Logo" class="logo-inline" />
-      Wonder Decor and Events
-    </h1>
-    <p>Bringing elegance, tradition, and wonder to your special moments</p>
+    <img src="logo.png" alt="7 Logo" class="logo" />
+    <div class="title-area">
+      <h1>7 Wonder Decor and Events</h1>
+      <p>Bringing elegance, tradition, and wonder to your special moments</p>
+    </div>
   </header>
 
   <div class="hero">
