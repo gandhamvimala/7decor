@@ -13,7 +13,7 @@
       color: #3b2f2f;
     }
     header {
-      background-image: url('background.jpg'); /* Replace with your actual background */
+      background-image: url('background.jpg');
       background-size: cover;
       background-position: center;
       text-align: center;
@@ -56,11 +56,12 @@
     }
     .specialties, .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
       margin-top: 20px;
+      justify-items: center;
     }
-    .specialties div, .gallery img {
+    .specialties div {
       background: #fff;
       padding: 20px;
       border-radius: 10px;
@@ -68,9 +69,11 @@
     }
     .gallery img {
       width: 100%;
-      height: auto;
+      max-width: 300px;
+      height: 200px;
       object-fit: cover;
       border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     .story-form-container {
       display: flex;
@@ -121,19 +124,22 @@
         <h3>Half-Saree/Dhoti Ceremonies</h3>
       </div>
       <div>
+        <h3>Babyshower & Cradle ceremonies</h3>
+      </div>
+      <div>
         <h3>First Birthday Celebrations</h3>
       </div>
       <div>
         <h3>Pooja & Religious Events</h3>
       </div>
       <div>
-        <h3>Engagements,Weddings & Receptions</h3>
+        <h3>Engagements</h3>
       </div>
       <div>
-        <h3>Babyshower/cradle functions</h3>
+        <h3>Weddings & Receptions</h3>
       </div>
       <div>
-        <h3>Haldi/Mehendi functions</h3>
+        <h3>Haldi & Mehendi Functions</h3>
       </div>
     </div>
   </section>
