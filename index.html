@@ -1,200 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>7 Wonder Decor and Events</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
+      font-family: 'Georgia', serif;
       margin: 0;
-      font-family: 'Open Sans', sans-serif;
+      padding: 0;
       background-color: #fffaf5;
-      color: #2e2e2e;
+      color: #3b2f2f;
     }
-
     header {
-      background-image: url('background.png');
+      background-image: url('background.jpg'); /* Replace with your actual background */
       background-size: cover;
       background-position: center;
-      padding: 30px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      color: white;
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-    }
-
-    .logo {
-      height: 60px;
-      margin-right: 20px;
-    }
-
-    .title-area h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5em;
-      margin: 0;
-      color: white;
-    }
-
-    .title-area p {
-      font-size: 1.1em;
-      margin: 5px 0 0;
-      color: white;
-    }
-
-    .hero {
-      background: #fffaf5;
-      height: 250px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       text-align: center;
-      color: #c48189;
-    }
-
-    .hero h2 {
-      font-size: 2.5em;
-      max-width: 800px;
-    }
-
-    .section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .section h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2em;
-      color: #d4af37;
-      margin-bottom: 20px;
-    }
-
-    .about p, .services ul {
-      font-size: 1.1em;
-      line-height: 1.8;
-    }
-
-    .services ul {
-      list-style-type: disc;
-      padding-left: 20px;
-    }
-
-    .contact form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .contact input, .contact textarea {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1em;
-    }
-
-    .contact button {
-      background-color: #c48189;
+      padding: 80px 20px;
       color: white;
-      padding: 10px;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+    header h2 {
+      font-size: 2rem;
+      margin: 10px 0;
+    }
+    header p {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1rem;
       border: none;
-      border-radius: 8px;
-      font-size: 1em;
+      border-radius: 5px;
       cursor: pointer;
     }
-
-    .contact button:hover {
-      background-color: #a9626d;
-    }
-
-    .social {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .social a {
-      margin: 0 10px;
-      color: #c48189;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .social a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      background-color: #2e2e2e;
+    .primary-btn {
+      background-color: #b77b42;
       color: white;
+    }
+    .secondary-btn {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+    section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .specialties, .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .specialties div, .gallery img {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .story-form-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: space-between;
+      padding: 40px 20px;
+    }
+    .story {
+      flex: 1;
+      min-width: 300px;
+    }
+    .form {
+      flex: 1;
+      min-width: 300px;
+      background: #fef3e7;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .form input, .form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    footer {
       text-align: center;
       padding: 20px;
+      background-color: #b77b42;
+      color: white;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="7 Logo" class="logo" />
-    <div class="title-area">
-      <h1>7 Wonder Decor and Events</h1>
-      <p>Bringing elegance, tradition, and wonder to your special moments</p>
-    </div>
+    <h1>7 WONDER</h1>
+    <h2>Decor and Events</h2>
+    <p>Celebrating Traditions with Elegance & Style</p>
+    <button class="btn secondary-btn">Explore Our Work</button>
+    <button class="btn primary-btn">Book Now</button>
   </header>
 
-  <div class="hero">
-    <h2>Creating Magical Moments, One Event at a Time</h2>
-  </div>
+  <section>
+    <h2>What We Specialize In</h2>
+    <div class="specialties">
+      <div>
+        <h3>Half-Saree/Dhoti Ceremonies</h3>
+      </div>
+      <div>
+        <h3>First Birthday Celebrations</h3>
+      </div>
+      <div>
+        <h3>Pooja & Religious Events</h3>
+      </div>
+      <div>
+        <h3>Engagements,Weddings & Receptions</h3>
+      </div>
+      <div>
+        <h3>Babyshower/cradle functions</h3>
+      </div>
+      <div>
+        <h3>Haldi/Mehendi functions</h3>
+      </div>
+    </div>
+  </section>
 
-  <div class="section about">
-    <h3>About Us</h3>
-    <p>
-      At <strong>7 Wonder Decor and Events</strong>, we believe every celebration deserves to be unforgettable.
-    </p>
-    <p>
-      What began as a small passion project has grown into a dream business built on creativity, dedication,
-      and a deep love for decor. From elegant wedding setups to vibrant half saree ceremonies, first birthdays
-      to traditional pooja events — we specialize in bringing your vision to life with style and heart.
-    </p>
-    <p>
-      We’re all about personalized details, DIY touches, and creating picture-perfect moments that reflect your
-      story and traditions.
-    </p>
-    <p>
-      With us, it’s not just decoration. It’s <em>emotion, art, and celebration — beautifully blended.</em>
-    </p>
-  </div>
+  <section>
+    <h2>A Glimpse of Our Events</h2>
+    <div class="gallery">
+      <img src="event1.jpg" alt="Event 1">
+      <img src="event2.jpg" alt="Event 2">
+      <img src="event3.jpg" alt="Event 3">
+      <img src="event4.jpg" alt="Event 4">
+    </div>
+  </section>
 
-  <div class="section services">
-    <h3>Our Services</h3>
-    <ul>
-      <li><strong>Half Saree Ceremonies</strong> – Traditional and modern backdrops, stage décor, floral jewelry, and themed props.</li>
-      <li><strong>First Birthdays</strong> – Custom themes, balloon arches, cake tables, and playful photo zones.</li>
-      <li><strong>Pooja Events</strong> – Clean and elegant traditional mandap setups, floral work, and rangoli.</li>
-      <li><strong>Weddings</strong> – Engagement to reception décor, aisle styling, drapes, and custom themes.</li>
-      <li><strong>Baby Showers</strong> – Soft pastels, floral arrangements, themed centerpieces, and welcoming setups.</li>
-      <li><strong>Engagements</strong> – Romantic backdrops, elegant florals, and personalized stage settings.</li>
-      <li><strong>Receptions</strong> – Grand lighting, elegant themes, floral chandeliers, and luxurious arrangements.</li>
-    </ul>
-  </div>
-
-  <div class="section contact">
-    <h3>Contact Us</h3>
-    <form action="#" method="post">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </div>
-
-  <div class="social">
-    <h3>Follow Us</h3>
-    <a href="https://www.instagram.com/7wonderdecorandevents" target="_blank">Instagram</a>
-    <a href="https://www.facebook.com/7wonderdecorandevents" target="_blank">Facebook</a>
+  <div class="story-form-container">
+    <div class="story">
+      <h2>Our Story</h2>
+      <p>At 7 Wonder Decor and Events, we bring your traditions to life through thoughtful design, vibrant colors, and personified touches. Based on years of experience and love for culture, we ensure every detail of your event shines.</p>
+    </div>
+    <div class="form">
+      <h2>Let’s Connect</h2>
+      <input type="text" placeholder="Name">
+      <input type="email" placeholder="Email">
+      <input type="text" placeholder="Event Type">
+      <textarea rows="4" placeholder="Message"></textarea>
+      <button class="btn primary-btn">Submit</button>
+    </div>
   </div>
 
   <footer>
-    <p>&copy; 2025 7 Wonder Decor and Events | Follow us on Instagram & Facebook</p>
+    <p>&copy; 2025 7 Wonder Decor and Events. All rights reserved.</p>
   </footer>
 </body>
 </html>
