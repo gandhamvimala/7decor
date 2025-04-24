@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>7 Wonder Decor and Events</title>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Georgia', serif;
       margin: 0;
@@ -34,27 +37,46 @@
       opacity: 0.95;
     }
     .btn {
-      padding: 12px 24px;
-      margin: 10px auto 0;
+      display: inline-block;
+      padding: 12px 30px;
       font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
       cursor: pointer;
-      display: block;
-      transition: background-color 0.3s ease;
-    }
-    .btn:hover {
-      background-color: #a96930;
-    }
-    .primary-btn {
       background-color: #b77b42;
       color: white;
+    }
+    .btn:hover {
+      background-color: #a3652e;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background-color: #fffaf5;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      text-decoration: none;
+      color: #3b2f2f;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    nav a:hover {
+      color: #b77b42;
     }
     section {
       padding: 40px 20px;
       text-align: center;
     }
-    .specialties, .gallery {
+    .specialties {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 30px;
@@ -66,14 +88,22 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .gallery {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding: 10px;
     }
     .gallery img {
-      width: 100%;
-      max-width: 300px;
+      width: 300px;
       height: 200px;
       object-fit: cover;
       border-radius: 10px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      flex-shrink: 0;
     }
     .story-form-container {
       display: flex;
@@ -86,13 +116,13 @@
       flex: 1;
       min-width: 300px;
       font-family: 'Georgia', serif;
-      font-size: 0.85rem;
-      line-height: 1.4;
+      font-size: 0.9rem;
+      line-height: 1.5;
       letter-spacing: 0.2px;
     }
     .story h2 {
       font-family: 'Georgia', serif;
-      font-size: 1rem;
+      font-size: 1.2rem;
       color: #3b2f2f;
       margin-bottom: 20px;
     }
@@ -102,6 +132,7 @@
       background: #fef3e7;
       padding: 20px;
       border-radius: 10px;
+      scroll-margin-top: 100px;
     }
     .form input, .form textarea {
       width: 100%;
@@ -116,60 +147,76 @@
       color: #3b2f2f;
       margin-bottom: 20px;
     }
-    .success-message {
-      display: none;
-      margin-top: 15px;
-      color: green;
-      font-weight: bold;
-    }
     footer {
       text-align: center;
       padding: 20px;
       background-color: #b77b42;
       color: white;
     }
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #modal .slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 20px;
+    }
+    #modal img {
+      height: 400px;
+      border-radius: 10px;
+      transition: opacity 0.5s ease-in-out;
+    }
+    #closeModal {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <div class="business-name">7 Wonder Decor and Events</div>
-    <p>Celebrating Traditions with Elegance & Style</p>
-    <button class="btn primary-btn" onclick="scrollToForm()">Book Now</button>
+    <p>Creating Magic One Event at a Time</p>
+    <a href="#contact" class="btn">Book Now</a>
   </header>
 
-  <section>
+  <nav>
+    <a href="#specialties">Specialties</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="rentals.html">Rentals</a>
+  </nav>
+
+  <section id="specialties">
     <h2>What We Specialize In</h2>
     <div class="specialties">
-      <div>
-        <h3>Half-Saree/Dhoti Ceremonies</h3>
-      </div>
-      <div>
-        <h3>Babyshower & Cradle ceremonies</h3>
-      </div>
-      <div>
-        <h3>First Birthday Celebrations</h3>
-      </div>
-      <div>
-        <h3>Pooja & Religious Events</h3>
-      </div>
-      <div>
-        <h3>Engagements</h3>
-      </div>
-      <div>
-        <h3>Weddings & Receptions</h3>
-      </div>
-      <div>
-        <h3>Haldi & Mehendi Functions</h3>
-      </div>
-      <div>
-        <h3>Milestone birthdays & Anniversaries</h3>
-      </div>
+      <div data-category="half-saree">Half-Saree/Dhoti Ceremonies</div>
+      <div data-category="babyshower">Babyshower & Cradle ceremonies</div>
+      <div data-category="birthday">First Birthday Celebrations</div>
+      <div data-category="pooja">Pooja & Religious Events</div>
+      <div data-category="engagement">Engagements</div>
+      <div data-category="wedding">Weddings & Receptions</div>
+      <div data-category="haldi">Haldi & Mehendi Functions</div>
+      <div data-category="milestone">Milestone Birthdays & Anniversaries</div>
     </div>
   </section>
 
-  <section>
-    <h2>A Glimpse of Our Events</h2>
+  <section id="gallery">
+    <h2>Gallery</h2>
     <div class="gallery">
       <img src="event1.jpg" alt="Event 1">
       <img src="event2.jpg" alt="Event 2">
@@ -182,49 +229,71 @@
     </div>
   </section>
 
-  <div class="story-form-container" id="contact-form">
+  <section id="about" class="story-form-container">
     <div class="story">
       <h2>Our Story</h2>
-      <p>At 7 Wonder Decor and Events, we blend tradition and creativity to bring your celebration to life. With years of experience and a love for culture, we craft events that truly reflect who you are. Each element is thoughtfully curated with elegance, heart, and care. It's more than just decor—it's your story told with warmth and style.</p>
-      <p>From intimate gatherings to grand affairs, we create moments that matter. Our mission is to make every detail magical and every guest feel special. Let us turn your vision into a beautiful reality.</p>
+      <p>At 7 Wonder Decor, we believe every event is a chance to tell a story. With years of experience and a passion for detail, we transform visions into unforgettable memories. From intimate gatherings to grand celebrations, we bring creativity, warmth, and elegance to every setup. Our team thrives on personalization and works closely with clients to reflect their unique personalities and cultures. Let us help turn your milestone into a timeless memory.</p>
     </div>
-    <div class="form">
-      <h2>Let’s Connect</h2>
-      <form onsubmit="showSuccessMessage(event)" action="https://formsubmit.co/your-email@example.com" method="POST">
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="event" placeholder="Event Type">
-        <textarea name="message" rows="4" placeholder="Message" required></textarea>
-        <button type="submit" class="btn primary-btn">Submit</button>
-        <div class="success-message" id="success-message">Thank you! Your message has been sent successfully.</div>
+    <div id="contact" class="form">
+      <h2>Contact Us</h2>
+      <form>
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <textarea rows="4" placeholder="Your Message"></textarea>
+        <button class="btn" type="submit">Send</button>
       </form>
     </div>
-  </div>
+  </section>
 
   <footer>
-    <p>&copy; 2025 7 Wonder Decor and Events. All rights reserved.</p>
+    <p>© 2025 7 Wonder Decor and Events. All rights reserved.</p>
+    <p><a href="rentals.html" style="color: white; text-decoration: underline;">Explore Our Rentals</a></p>
   </footer>
 
-  <script>
-    function scrollToForm() {
-      const form = document.getElementById('contact-form');
-      form.scrollIntoView({ behavior: 'smooth' });
-      form.style.boxShadow = '0 0 10px 2px #b77b42';
-      setTimeout(() => {
-        form.style.boxShadow = 'none';
-      }, 1500);
-    }
+  <div id="modal">
+    <span id="closeModal">&times;</span>
+    <div class="slider" id="modalSlider"></div>
+  </div>
 
-    function showSuccessMessage(event) {
-      event.preventDefault();
-      const form = event.target;
-      const successMessage = form.querySelector('#success-message');
-      successMessage.style.display = 'block';
-      setTimeout(() => {
-        successMessage.style.display = 'none';
-        form.submit();
-      }, 3000);
-    }
+  <script>
+    const specialties = document.querySelectorAll('.specialties div');
+    const modal = document.getElementById('modal');
+    const modalSlider = document.getElementById('modalSlider');
+    const closeModal = document.getElementById('closeModal');
+
+    const specialtyImages = {
+      "half-saree": ["half1.jpg", "half2.jpg"],
+      "babyshower": ["baby1.jpg", "baby2.jpg" , "cradle1.jpg" ,"cradle2.jpg" ],
+      "birthday": ["bday1.jpg", "bday2.jpg" "bday3.jpg" "bday4.jpg" "bday5.jpg"],
+      "pooja": ["pooja1.jpg", "pooja2.jpg" , "pooja3.jpg", "pooja4.jpg" , "pooja5.jpg", "pooja6.jpg"],
+      "engagement": ["engagement1.jpg", "engagement2.jpg" , "engagement3.jpg" , "engagement4.jpg" , "engagement5.jpg"],
+      "wedding": ["wedding1.jpg", "wedding2.jpg" , "wedding3.jpg" , "weddin42.jpg" , "wedding5.jpg"],
+      "haldi": ["haldi1.jpg", "haldi2.jpg" , "haldi3.jpg" , "haldi4.jpg" , "haldi5.jpg" , "haldi6.jpg" , "haldi7.jpg" , "haldi8jpg"],
+      "milestone": ["mile1.jpg", "mile2.jpg"]
+    };
+
+    specialties.forEach(item => {
+      item.addEventListener('click', () => {
+        const category = item.dataset.category;
+        const images = specialtyImages[category] || [];
+        modal.style.display = 'flex';
+        modalSlider.innerHTML = '';
+        images.forEach(src => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.style.opacity = 0;
+          modalSlider.appendChild(img);
+          setTimeout(() => {
+            img.style.opacity = 1;
+          }, 100);
+        });
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+      modalSlider.innerHTML = '';
+    });
   </script>
 </body>
 </html>
