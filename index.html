@@ -189,10 +189,18 @@
 <body>
   <header>
     <div class="business-name">7 Wonder Decor and Events</div>
-    <p>Elegant Designs for Unforgettable Moments</p>
+    <p class="tagline">Elegant Designs for Unforgettable Moments</p>
     <a href="#contact" class="btn">Book Now</a>
   </header>
-
+<script>
+    window.addEventListener('load', () => {
+      const tagline = document.querySelector('.tagline');
+      tagline.style.animation = 'none';
+      tagline.offsetHeight;
+      tagline.style.animation = 'fadeInUp 1s ease-out forwards';
+      tagline.style.animationDelay = '0.5s';
+    });
+  </script>
   <nav>
     <a href="#specialties">Specialties</a>
     <a href="#gallery">Gallery</a>
