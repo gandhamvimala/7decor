@@ -17,24 +17,28 @@
       background-size: cover;
       background-position: center;
       text-align: center;
-      padding: 80px 20px;
+      padding: 100px 20px 80px;
       color: white;
     }
-    header h1 {
-      font-size: 3rem;
-      margin: 0;
+    .logo-img {
+      width: 300px;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
     }
     header h2 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin: 10px 0;
+      font-weight: 700;
     }
     header p {
-      font-size: 1.2rem;
+      font-size: 1.8rem;
       font-style: italic;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      opacity: 0.95;
     }
     .btn {
-      padding: 10px 20px;
+      padding: 12px 24px;
       margin: 10px;
       font-size: 1rem;
       border: none;
@@ -110,8 +114,9 @@
 </head>
 <body>
   <header>
-    <h1>7 WONDER</h1>
-    <h2>Decor and Events</h2>
+    <div>
+      <img src="logo.png" alt="7 Wonder Logo" class="logo-img">
+    </div>
     <p>Celebrating Traditions with Elegance & Style</p>
     <button class="btn secondary-btn">Explore Our Work</button>
     <button class="btn primary-btn">Book Now</button>
