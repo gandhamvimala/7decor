@@ -31,41 +31,38 @@
       border: 1px solid #ccc;
     }
     button {
-  display: block;
-  margin: 0 auto;
-  background-color: #b77b42;
-  color: white;
-  padding: 14px 36px;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-  background-color: #8c5a2d;
-  transform: scale(1.05);
-}
- .back-link {
-  text-align: center; /* Center the link */
-  margin-top: 20px;
-}
-
-.back-link a {
-  color: #3b2f2f; /* dark brown */
-  font-weight: bold;
-  text-decoration: underline;
-  font-size: 1.1em;
-}
-
-.back-link a:hover {
-  color: #8c5a2d; /* hover color */
-}
+      display: block;
+      margin: 0 auto;
+      background-color: #b77b42;
+      color: white;
+      padding: 14px 36px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+      background-color: #8c5a2d;
+      transform: scale(1.05);
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .back-link a {
+      color: #3b2f2f;
+      font-weight: bold;
+      text-decoration: underline;
+      font-size: 1.1em;
+    }
+    .back-link a:hover {
+      color: #8c5a2d;
+    }
     .success-message {
       display: none;
       max-width: 600px;
-      margin: 20px auto;
+      margin: 20px auto 0;
       background-color: #d4edda;
       color: #155724;
       padding: 15px;
@@ -78,10 +75,6 @@ button:hover {
 <body>
 
   <h1>Book Your Event</h1>
-
-  <div class="success-message" id="successMessage">
-    Thank you! Your booking request has been submitted successfully.
-  </div>
 
   <form action="https://formspree.io/f/myzwzgja" method="POST" id="bookingForm">
     <label for="name">Full Name</label>
@@ -122,6 +115,10 @@ button:hover {
     <button type="submit">Submit Booking</button>
   </form>
 
+  <div class="success-message" id="successMessage">
+    Thank you! Your booking request has been submitted successfully.
+  </div>
+
   <div class="back-link">
     <p><a href="index.html">← Back to Home</a></p>
   </div>
@@ -144,6 +141,7 @@ button:hover {
         if (response.ok) {
           form.reset();
           successMessage.style.display = 'block';
+          successMessage.scrollIntoView({ behavior: 'smooth' });
         } else {
           alert('There was a problem submitting your form. Please try again.');
         }
