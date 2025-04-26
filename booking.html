@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: 'Georgia', serif;
-      background-color: #fffaf5;
+      background-color: #dc9b5a;
       color: #3b2f2f;
       padding: 20px;
     }
@@ -31,17 +31,22 @@
       border: 1px solid #ccc;
     }
     button {
-      background-color: #b77b42;
-      color: white;
-      padding: 14px 36px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #8c5a2d;
-    }
+  display: block;
+  margin: 0 auto;
+  background-color: #b77b42;
+  color: white;
+  padding: 14px 36px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #8c5a2d;
+  transform: scale(1.05);
+}
     .back-link {
       text-align: center;
       margin-top: 20px;
