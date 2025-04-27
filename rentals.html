@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rentals | 7 Wonder Decor and Events</title>
+  <style>
+    body { font-family: 'Georgia', serif; background: #fdf7f0; margin: 0; padding: 20px; }
+    h1 { text-align: center; color: #5a3e36; margin-bottom: 30px; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1000px; margin: auto; }
+    .tile { background: #f0e0d6; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: 0.3s; }
+    .tile:hover { background: #f8e8dd; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    #cartIcon { position: fixed; top: 20px; right: 20px; background: #e3b88d; padding: 10px; border-radius: 50%; cursor: pointer; }
+    #cartIcon:hover { background: #d1a46c; }
+    #cartIcon span { color: white; font-weight: bold; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; }
+    .modal-content { background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 700px; overflow-y: auto; max-height: 90%; }
+    .modal-images { display: flex; flex-wrap: wrap; gap: 10px; }
+    .item-card { background: #f9eee7; padding: 10px; border-radius: 8px; width: 140px; text-align: center; }
+    .item-card img { width: 100%; height: 100px; object-fit: cover; border-radius: 5px; }
+    .cart { display: none; background: #fff4eb; padding: 20px; margin: 20px auto; max-width: 600px; border-radius: 10px; }
+    .cart-item { margin: 10px 0; }
+    form { background: #fff4eb; padding: 20px; border-radius: 10px; margin: 20px auto; max-width: 600px; }
+    form input, form textarea { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #dcbfa2; }
+    form button {
+      background: #e3b88d;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 5px;
+      width: auto;
+      cursor: pointer;
+      display: block;
+      margin: 20px auto 0;
+      font-size: 16px;
+    }
+    form button:hover { background: #d1a46c; }
+  </style>
+</head>
+<body>
+
+<h1>Our Rentals</h1>
+
+<div id="cartIcon" onclick="showCart()">
+  🛒 <span id="cartCount">0</span>
+</div>
+
+<div class="tiles" id="tiles"></div>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h2 id="modalTitle"></h2>
+    <div class="modal-images" id="modalImages"></div>
+    <button onclick="closeModal()" style="margin-top:10px;">Close</button>
+  </div>
+</div>
+
+<div class="cart" id="cart">
+  <h2>Your Cart</h2>
+  <div id="cartItems"></div>
+  <div><strong>Total: $<span id="cartTotal">0</span></strong></div>
+</div>
+
+<form id="rentalForm" action="https://formspree.io/f/meogogkg" method="POST">
+  <h2>Submit Your Rental Order</h2>
+  <p><strong>Drop-off and Pickup Location:</strong> 2590 San Ramon Valley Blvd, San Ramon</p>
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
+  <input type="text" name="contact" placeholder="Contact Number" required>
+  <input type="text" name="dropoff_time" placeholder="Drop-off Time" required>
+  <input type="text" name="pickup_time" placeholder="Pickup Time" required>
+  <textarea name="notes" placeholder="Notes (Optional)"></textarea>
+  <input type="hidden" name="cart_details" id="cartDetails">
+  <button type="submit">Place Rental Order</button>
+</form>
+
+<script>
+const categories = [
+  { name: 'Drapes', items: [
+    { name: 'Sage green drapes', desc: 'Sage green color chiffon drapes', price: 10, img: 'sagegreen.png' },
+    { name: 'Peach drapes', desc: 'peach pastel shade chiffon drapes', price: 10, img: 'peach.png' }
+  ]},
+  { name: 'Table Cloths', items: [
+    { name: 'Round Table Cloth', desc: 'White color round table cloth', price: 5, img: 'https://via.placeholder.com/100?text=Table1' },
+    { name: 'Rectangular Cloth', desc: 'Long cloth', price: 6, img: 'https://via.placeholder.com/100?text=Table2' }
+  ]},
+  { name: 'Backdrop Cloths', items: [
+    { name: 'Pichwai backdrop', desc: 'Pichwai print backdrop cloth', price: 20, img: 'https://via.placeholder.com/100?text=Backdrop1' }
+  ]},
+  { name: 'Floor Mats', items: [
+    { name: 'Geen Carpet', desc: 'RoyalGreen grass mat', price: 15, img: 'https://via.placeholder.com/100?text=Mat1' }
+  ]},
+  { name: 'Chairs', items: [
+    { name: 'White Chair', desc: 'White foldable chairs', price: 1, img: 'https://via.placeholder.com/100?text=Chair1' }
+  ]},
+  { name: 'Special Chairs/Sofa', items: [
+    { name: 'Gold Sofa', desc: 'Gold color sofa', price: 100, img: 'https://via.placeholder.com/100?text=Special1' }
+  ]},
+  { name: 'Backdrop Stand Sets', items: [
+    { name: 'Metal Stand', desc: '7ft-12ft Adjustable Aluminum Heavy duty stand comes with 2 bases with pins and 2 sides and 1 cross bar', price: 25, img: 'backdropstand.png' }
+  ]},
+  { name: 'Flower Garlands', items: [
+    { name: 'Pink & White garlands', desc: 'Pink and White garlands', price: 5, img: 'https://via.placeholder.com/100?text=Flower1' },
+    { name: 'Yellow garlands', desc: 'Bright Yellow cloth garlands', price: 5, img: 'https://via.placeholder.com/100?text=Flower1' },
+    { name: 'Ivory garlands', desc: 'Ivory cloth garlands', price: 5, img: 'https://via.placeholder.com/100?text=Flower1' }
+  ]},
+  { name: 'Center Pieces', items: [
+    { name: 'Gold metal vase', desc: 'Gold color metal contemporary centerpiece', price: 5, img: 'https://via.placeholder.com/100?text=Center1' }
+  ]}
+];
+
+let cart = [];
+
+function loadTiles() {
+  const tiles = document.getElementById('tiles');
+  categories.forEach((cat, index) => {
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    tile.innerText = cat.name;
+    tile.onclick = () => openModal(index);
+    tiles.appendChild(tile);
+  });
+}
+
+function openModal(index) {
+  const modal = document.getElementById('modal');
+  const modalImages = document.getElementById('modalImages');
+  modalImages.innerHTML = '';
+  document.getElementById('modalTitle').innerText = categories[index].name;
+
+  categories[index].items.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'item-card';
+    card.innerHTML = `
+      <img src="${item.img}" alt="${item.name}">
+      <h4>${item.name}</h4>
+      <p>${item.desc}</p>
+      <p><strong>$${item.price}</strong></p>
+      <input type="number" id="qty-${index}-${idx}" placeholder="Qty" min="1" style="width:100%;margin:5px 0;">
+      <button onclick="addToCart(${index}, ${idx})">Add</button>
+    `;
+    modalImages.appendChild(card);
+  });
+
+  modal.style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('modal').style.display = 'none';
+}
+
+function addToCart(catIndex, itemIndex) {
+  const qtyInput = document.getElementById(`qty-${catIndex}-${itemIndex}`);
+  const qty = parseInt(qtyInput.value);
+  if (!qty || qty <= 0) { alert('Enter quantity'); return; }
+  const item = categories[catIndex].items[itemIndex];
+
+  const existing = cart.find(c => c.name === item.name);
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({ name: item.name, qty: qty, price: item.price });
+  }
+  
+  updateCart();
+}
+
+function updateCart() {
+  document.getElementById('cart').style.display = 'block';
+  document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+  const cartItemsDiv = document.getElementById('cartItems');
+  cartItemsDiv.innerHTML = cart.map(item => `<div class="cart-item">${item.name} x ${item.qty} = $${item.price * item.qty}</div>`).join('');
+  document.getElementById('cartTotal').innerText = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+}
+
+function showCart() {
+  document.getElementById('cart').scrollIntoView({ behavior: 'smooth' });
+}
+
+const form = document.getElementById('rentalForm');
+form.addEventListener('submit', async function(event) {
+  event.preventDefault();
+  const details = cart.map(item => `${item.name} x ${item.qty} = $${item.price * item.qty}`).join('\n');
+  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  document.getElementById('cartDetails').value = `Items:\n${details}\n\nTotal: $${total}`;
+
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      form.reset();
+      cart = [];
+      updateCart();
+      document.getElementById('cart').style.display = 'none';
+
+      const successMsg = document.createElement('div');
+      successMsg.style.background = '#d4edda';
+      successMsg.style.color = '#155724';
+      successMsg.style.padding = '15px';
+      successMsg.style.borderRadius = '5px';
+      successMsg.style.marginTop = '15px';
+      successMsg.innerText = 'Rental order placed successfully!';
+      form.parentNode.insertBefore(successMsg, form.nextSibling);
+
+      setTimeout(() => {
+        successMsg.remove();
+      }, 5000);
+    } else {
+      alert('Something went wrong. Please try again.');
+    }
+  } catch (error) {
+    alert('Error submitting the form.');
+  }
+});
+
+loadTiles();
+  window.addEventListener('click', function(event) {
+  const modal = document.getElementById('modal');
+  if (event.target == modal) {
+    closeModal();
+  }
+});
+
+</script>
+
+</body>
+</html>
