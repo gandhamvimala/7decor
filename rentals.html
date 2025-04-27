@@ -38,6 +38,7 @@
 </head>
 <body>
 
+<a href="index.html" style="display:inline-block; margin-bottom:20px; color:#5a3e36; text-decoration:underline;">&larr; Back to Home</a>
 <h1>Our Rentals</h1>
 
 <div id="cartIcon" onclick="showCart()">
@@ -76,8 +77,8 @@
 <script>
 const categories = [
   { name: 'Drapes', items: [
-    { name: 'Sage green drapes', desc: 'Sage green color chiffon drapes', price: 10, img: 'sagegreen.png' },
-    { name: 'Peach drapes', desc: 'peach pastel shade chiffon drapes', price: 10, img: 'peach.png' }
+    { name: 'Sage green drapes', desc: 'Sage green color chiffon drapes', price: 10, img: 'https://via.placeholder.com/100?text=Drape1' },
+    { name: 'Peach drapes', desc: 'peach pastel shade chiffon drapes', price: 10, img: 'https://via.placeholder.com/100?text=Drape2' }
   ]},
   { name: 'Table Cloths', items: [
     { name: 'Round Table Cloth', desc: 'White color round table cloth', price: 5, img: 'https://via.placeholder.com/100?text=Table1' },
@@ -96,7 +97,7 @@ const categories = [
     { name: 'Gold Sofa', desc: 'Gold color sofa', price: 100, img: 'https://via.placeholder.com/100?text=Special1' }
   ]},
   { name: 'Backdrop Stand Sets', items: [
-    { name: 'Metal Stand', desc: '7ft-12ft Adjustable Aluminum Heavy duty stand comes with 2 bases with pins and 2 sides and 1 cross bar', price: 25, img: 'backdropstand.png' }
+    { name: 'Metal Stand', desc: 'Heavy duty stand comes with 2 bases with pins and 2 sides and 1 cross bar', price: 25, img: 'https://via.placeholder.com/100?text=Stand1' }
   ]},
   { name: 'Flower Garlands', items: [
     { name: 'Pink & White garlands', desc: 'Pink and White garlands', price: 5, img: 'https://via.placeholder.com/100?text=Flower1' },
@@ -219,7 +220,7 @@ form.addEventListener('submit', async function(event) {
 });
 
 loadTiles();
-  window.addEventListener('click', function(event) {
+window.addEventListener('click', function(event) {
   const modal = document.getElementById('modal');
   if (event.target == modal) {
     closeModal();
