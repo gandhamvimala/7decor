@@ -540,5 +540,108 @@
     });
   }
 </script>
+  <div id="chatbot-container"></div>
+<script>
+window.onload = () => setTimeout(startChat, 3000);
+let userResponses = {}, step = 0, chatWindow, typingIndicator;
+function startChat() {
+  const chatContainer = document.getElementById('chatbot-container');
+  chatWindow = document.createElement('div');
+  Object.assign(chatWindow.style, {
+    position: 'fixed', bottom: '20px', right: '20px', width: '280px', height: '400px', backgroundColor: '#fff',
+    border: '1px solid #ccc', boxShadow: '0 4px 12px rgba(0,0,0,0.2)', borderRadius: '10px', overflow: 'hidden',
+    display: 'flex', flexDirection: 'column', zIndex: '9999', animation: 'popIn 0.5s ease'
+  });
+  chatWindow.innerHTML = `
+    <div style="background:#4CAF50;color:#fff;padding:10px;text-align:center;font-size:16px;display:flex;justify-content:space-between;align-items:center">
+      <span>Welcome to 7 Wonder Decor!</span>
+      <button style="background:transparent;border:none;color:#fff;font-size:18px;cursor:pointer" onclick="toggleChat()">-</button>
+    </div>
+    <div id="chat-body" style="flex:1;padding:10px;overflow-y:auto;font-size:14px;display:flex;flex-direction:column;gap:8px"></div>
+    <div style="padding:5px;border-top:1px solid #ccc;display:flex">
+      <input id="chat-input" placeholder="Type your message..." style="flex:1;padding:8px;border:1px solid #ccc;border-radius:4px">
+    </div>
+  `;
+  chatContainer.appendChild(chatWindow);
+  botNext();
+  document.getElementById('chat-input').addEventListener('keypress', handleInput);
+}
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes popIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}`;
+document.head.appendChild(style);
+
+function toggleChat() {
+  chatWindow.style.display = chatWindow.style.display === 'none' ? 'flex' : 'none';
+}
+function addMessage(text, isUser = false) {
+  const msg = document.createElement('div');
+  Object.assign(msg.style, {
+    padding: '6px 10px', backgroundColor: isUser ? '#e0f7fa' : '#f1f8e9',
+    borderRadius: '8px', alignSelf: isUser ? 'flex-end' : 'flex-start', maxWidth: '80%'
+  });
+  msg.innerHTML = text;
+  const body = document.getElementById('chat-body');
+  if (typingIndicator) {
+    body.removeChild(typingIndicator);
+    typingIndicator = null;
+  }
+  body.appendChild(msg);
+  body.scrollTop = body.scrollHeight;
+}
+function showTyping() {
+  typingIndicator = document.createElement('div');
+  typingIndicator.innerHTML = 'Typing...';
+  Object.assign(typingIndicator.style, {
+    fontStyle: 'italic', color: '#aaa', alignSelf: 'flex-start', paddingLeft: '10px'
+  });
+  const body = document.getElementById('chat-body');
+  body.appendChild(typingIndicator);
+  body.scrollTop = body.scrollHeight;
+}
+function botNext() {
+  const prompts = [
+    'Hello! May I have your name, please?',
+    'Lovely! What type of event are you planning (Birthday, Wedding, Rental, etc)?',
+    'Awesome! When is your event happening? (date)',
+    'Great! Where will the event be hosted? (venue)',
+    'Finally, what is your estimated budget for the event?',
+    'Could you please provide your contact number? Our team will call you shortly. 📞'
+  ];
+  if (step < prompts.length) {
+    showTyping();
+    setTimeout(() => addMessage(prompts[step]), 800);
+  }
+}
+function handleInput(e) {
+  if (e.key === 'Enter' && e.target.value.trim()) {
+    const userText = e.target.value.trim();
+    addMessage(userText, true);
+    specialReplies(userText);
+    ['name', 'eventType', 'eventDate', 'venue', 'budget', 'contactNumber'].forEach((key, idx) => {
+      if (step === idx) userResponses[key] = userText;
+    });
+    e.target.value = '';
+    step++;
+    if (step < 6) botNext();
+    else { addMessage('Thank you so much! 🎉 Our team will reach out soon.'); sendForm(); }
+  }
+}
+function specialReplies(text) {
+  const t = text.toLowerCase();
+  if (/(don't know|not sure|idk)/.test(t)) addMessage('No worries! 😊 Our expert team will guide you through everything.');
+  if (/(rental|rent)/.test(t)) addMessage('It sounds like you are interested in rentals! 🎉 Check out our <a href="https://gandhamvimala.github.io/7decor/rentals.html" target="_blank" style="color:#4CAF50">Rentals Section</a>.');
+}
+function sendForm() {
+  fetch('https://formspree.io/f/xzzrzkea', {
+    method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    body: JSON.stringify(userResponses)
+  }).then(r => r.ok && setTimeout(() => document.getElementById('chatbot-container').innerHTML = '', 2000))
+    .catch(err => console.error('Error:', err));
+}
+</script>
 </body>
 </html>
